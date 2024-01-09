@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Age calculator app</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <article class="calculator">
+      <fieldset class="fieldset">
+        <h2 class="visually-hidden">Your date of birth</h2>
+        <div>
+          <label for="day">Day</label>
+          <input type="text" name="day" id="day" class="input" placeholder="DD">
+        </div>
+        <div>
+          <label for="month">Month</label>
+          <input type="text" name="month" id="month" class="input" placeholder="MM">
+        </div>
+        <div>
+          <label for="year">Year</label>
+          <input type="text" name="year" id="year" class="input" placeholder="YYYY">
+        </div>
+
+        <button type="button" class="btn"><span class="visually-hidden">submit</span></button>
+      </fieldset>
+      <section class="output">
+        <h2 class="visually-hidden">Results</h2>
+        <p>
+          <span class="results year">--</span>&nbsp;years
+        </p>
+        <p>
+            <span class="results months">--</span>&nbsp;months
+        </p>
+        <p>
+          <span class="results days">--</span>&nbsp;days
+        </p>
+      </section>
+    </article>
+  </main>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+  <script src="/js/calculator.js"></script>
+</body>
+
+</html>
