@@ -8,6 +8,8 @@ const yearOutput = document.querySelector('.results.year');
 const monthOutput = document.querySelector('.results.month');
 const dayOutput = document.querySelector('.results.day');
 
+// ======================================================= validation
+
 const enoughDays = () => {
     const month = parseInt(monthInput.value);
     const short = [4, 6, 9, 11];
@@ -68,6 +70,19 @@ pristine.addValidator(
     'Must be in the past'
 )
 
+monthInput.addEventListener('change', () => {
+    pristine.validate(dayInput);
+    pristine.validate(monthInput);
+})
+dayInput.addEventListener('change', () => {
+    pristine.validate(dayInput);
+})
+yearInput.addEventListener('change', () => {
+    pristine.validate(yearInput);
+})
+
+// ====================================================== animation
+
 const animateValue = (field, max) => {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -81,6 +96,8 @@ const animateValue = (field, max) => {
     window.requestAnimationFrame(step);
 }
 
+// ===================================================== form control
+
 const onFormSubmit = () => {
     const birth = new Date(`${yearInput.value}-${monthInput.value}-${dayInput.value}`);
     const now = new Date(Date.now());
@@ -90,22 +107,10 @@ const onFormSubmit = () => {
     const month = diffDate.getMonth();
     const day = diffDate.getDate();
 
-    yearOutput.textContent = `${year}`;
-    monthOutput.textContent = `${month}`;
-    dayOutput.textContent = `${day}`;
+    animateValue(yearOutput, year);
+    animateValue(monthOutput, month);
+    animateValue(dayOutput, day);
 }
-
-monthInput.addEventListener('change', () => {
-    pristine.validate(dayInput);
-    pristine.validate(monthInput);
-})
-dayInput.addEventListener('change', () => {
-    pristine.validate(dayInput);
-})
-
-yearInput.addEventListener('change', () => {
-    pristine.validate(yearInput);
-})
 
 dateForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
