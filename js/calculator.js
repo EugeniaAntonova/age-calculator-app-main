@@ -83,11 +83,11 @@ yearInput.addEventListener('change', () => {
 
 // ====================================================== animation
 
-const animateValue = (field, max) => {
+const animateValue = (field, max, time) => {
     let startTimestamp = null;
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / 3000, 1);
+        const progress = Math.min((timestamp - startTimestamp) / time, 1);
         field.textContent = `${Math.floor(progress * max)}`;
         if (progress < 1) {
             window.requestAnimationFrame(step);
@@ -107,9 +107,10 @@ const onFormSubmit = () => {
     const month = diffDate.getMonth();
     const day = diffDate.getDate();
 
-    animateValue(yearOutput, year);
-    animateValue(monthOutput, month);
-    animateValue(dayOutput, day);
+    setTimeout(() => {animateValue(yearOutput, year, 2000);});
+    setTimeout(() => {animateValue(monthOutput, month, 500);}, 2000);
+    setTimeout(() => {animateValue(dayOutput, day, 2000);}, 2500);
+    
 }
 
 dateForm.addEventListener('submit', (evt) => {
