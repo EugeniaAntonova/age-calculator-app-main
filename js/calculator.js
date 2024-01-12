@@ -8,26 +8,77 @@ const yearOutput = document.querySelector('.results.year');
 const monthOutput = document.querySelector('.results.month');
 const dayOutput = document.querySelector('.results.day');
 
+const enoughDays = () => {
+    const month = parseInt(monthInput.value);
+    const short = [4, 6, 9, 11];
+    let enough = true
+    if (month == 2) {
+        enough = parseInt(dayInput.value) <= 29;
+    } else if (short.includes(month)) {
+        enough = parseInt(dayInput.value) <= 30;
+        console.log("enough", enough);
+    }
+
+    return enough;
+}
+
+const isPastYear = () => {
+    const now = new Date(Date.now());
+    const currentYear = now.getFullYear();
+    const isPast = parseInt(yearInput.value) <= currentYear;
+    return isPast
+}
+
+const isInThePast = () => {
+    let past = false;
+    if (monthInput.value) {
+        if (dayInput.value) {
+            const now = new Date(Date.now());
+            const date = new Date(`${yearInput.value}-${monthInput.value}-${dayInput.value}`);
+            past = Date.parse(date) <= Date.parse(now);
+        }
+    }
+    return past;
+}
+
 const pristine = new Pristine(dateForm, {
     classTo: 'form-group',
     errorClass: 'has-danger',
     successClass: 'has-success',
     errorTextParent: 'form-group',
     errorTextTag: 'div',
-    errorTextClass: 'text-help' 
-});
+    errorTextClass: 'text-help'
+}, false);
+
+pristine.addValidator(
+    dayInput,
+    enoughDays,
+    'Must be a valid date'
+)
+
+pristine.addValidator(
+    yearInput,
+    isPastYear,
+    'Must be in the past'
+)
+
+pristine.addValidator(
+    yearInput,
+    isInThePast,
+    'Must be in the past'
+)
 
 const animateValue = (field, max) => {
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / 3000, 1);
-    field.textContent = `${Math.floor(progress * max)}`;
-    if (progress < 1) {
-      window.requestAnimationFrame(step);
-    }
-  };
-  window.requestAnimationFrame(step);
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / 3000, 1);
+        field.textContent = `${Math.floor(progress * max)}`;
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
 }
 
 const onFormSubmit = () => {
@@ -44,13 +95,16 @@ const onFormSubmit = () => {
     dayOutput.textContent = `${day}`;
 }
 
-month.addEventListener('change', () => {
-    const short = [4, 6, 9, 11]
-    if (month.value == 4) {
-        dayInput.setAttribute("max", 29);
-    } else if (short.includes(month.value)) {
-        dayInput.setAttribute("max", 30);        
-    }
+monthInput.addEventListener('change', () => {
+    pristine.validate(dayInput);
+    pristine.validate(monthInput);
+})
+dayInput.addEventListener('change', () => {
+    pristine.validate(dayInput);
+})
+
+yearInput.addEventListener('change', () => {
+    pristine.validate(yearInput);
 })
 
 dateForm.addEventListener('submit', (evt) => {
