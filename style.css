@@ -1,198 +1,237 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap');
 
 :root {
---purple: hsl(259, 100%, 65%);
---light-red: hsl(0, 100%, 67%);
+  --purple: hsl(259, 100%, 65%);
+  --light-red: hsl(0, 100%, 67%);
 
---white: hsl(0, 0%, 100%);
---off-white: hsl(0, 0%, 94%);
---light-grey: hsl(0, 0%, 86%);
---smokey-grey: hsl(0, 1%, 44%);
---off-black: hsl(0, 0%, 8%);
+  --white: hsl(0, 0%, 100%);
+  --off-white: hsl(0, 0%, 94%);
+  --light-grey: hsl(0, 0%, 86%);
+  --smokey-grey: hsl(0, 1%, 44%);
+  --off-black: hsl(0, 0%, 8%);
 
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.page  {
-    width: 100vw;
-    height: 100vh;
-    padding-inline: 16px;
-    padding-top: 88px;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--light-grey);
+.page {
+  width: 100vw;
+  height: 100vh;
+  padding-inline: 16px;
+  padding-top: 88px;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--light-grey);
 }
 
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
 
-    white-space: nowrap;
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
-    overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.calculator {
+  max-width: 840px;
+  width: 100%;
+  padding: 48px 0 48px 24px;
+  background-color: var(--white);
+  border-radius: 24px 24px 100px;
+}
+
+.fieldset {
+  --gap: 14px;
+  padding: 0;
+  padding-bottom: 64px;
+  margin: 0;
+  margin-right: 24px;
+  border: none;
+  border-bottom: 1px solid var(--light-grey);
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  align-items: center;
+}
+
+.fieldset label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  color: var(--smokey-grey);
+}
+
+.fieldset .form-group {
+  position: relative;
+}
+
+.text-help {
+  position: absolute;
+  top: 110%;
+  letter-spacing: -0.04em;
+  color: var(--light-red);
+  font-weight: 200;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.form-group.has-danger .input{
+  border: 1px solid var(--light-red);
+}
+
+.form-group.has-danger label {
+  color: var(--light-red)
+}
+
+.fieldset .input {
+  min-width: 0;
+  width: 89px;
+  height: 40px;
+  height: 54px;
+  padding: 12px;
+
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--off-black);
+  border: 1px solid var(--light-grey);
+  outline-color: var(--purple);
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.fieldset .input::placeholder {
+  color: var(--smokey-grey);
+}
+
+/* Chrome, Safari, Edge, Opera */
+.fieldset .input::-webkit-outer-spin-button,
+.fieldset .input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.fieldset .input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.btn {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  bottom: -35px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border: none;
+  border-radius: 50%;
+  outline-color: var(--purple);
+  outline-offset: 4px;
+  background-color: var(--purple);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='44'%3E%3Cpath fill='none' stroke='%23FFF' stroke-width='2' d='M1 22.019C8.333 21.686 23 25.616 23 44m0 0V0m22 22.019C37.667 21.686 23 25.616 23 44'/%3E%3C/svg%3E");
+  transition: background-color .3s ease-in-out, offset .3s ease-in-out;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--off-black);
+  outline-color: var(--off-black);
+}
+
+.output {
+  padding-top: 64px;
+  font-size: 60px;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.output p {
+  margin: 0;
+  letter-spacing: -0.04em;
+  line-height: 100%;
+  color: var(--off-black);
+}
+
+.output p .results {
+  color: var(--purple);
+}
+
+@media (min-width: 1024px) {
+  .page {
+    padding-top: 155px;
   }
 
   .calculator {
-    max-width: 840px;
-    width: 100%;
-    padding: 48px 0 48px 24px;
-    background-color: var(--white);
-    border-radius: 24px 24px 100px;
+    padding: 56px;
+    border-radius: 24px 24px 200px;
   }
 
   .fieldset {
-    --gap: 14px;
-    padding: 0;
-    padding-bottom: 64px;
-    margin: 0;
-    margin-right: 24px;
-    border: none;
-    border-bottom: 1px solid var(--light-grey);
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap);
-    align-items: center;
+    margin-right: 0;
+    padding-bottom: 80px;
+    gap: 32px;
   }
 
   .fieldset label {
-    display: block;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: var(--smokey-grey);
+    margin-bottom: 10px;
   }
 
   .fieldset .input {
-    min-width: 0;
-    width: 89px;
-    height: 40px;
-    height: 54px;
-    padding: 12px;
-
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--off-black);
-    border: 1px solid var(--light-grey);
-    outline-color: var(--purple);
-    background-color: transparent;
-    border-radius: 8px;
-  }
-
-  .fieldset .input::placeholder {
-    color: var(--smokey-grey);
+    width: 160px;
+    height: 68px;
+    padding: 24px;
+    font-size: 32px;
   }
 
   .btn {
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    bottom: -35px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    border: none;
-    border-radius: 50%;    
-    outline-color: var(--purple);
-    outline-offset: 4px;  
-    background-color: var(--purple);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='44'%3E%3Cpath fill='none' stroke='%23FFF' stroke-width='2' d='M1 22.019C8.333 21.686 23 25.616 23 44m0 0V0m22 22.019C37.667 21.686 23 25.616 23 44'/%3E%3C/svg%3E");
-    transition: background-color .3s ease-in-out, offset .3s ease-in-out;
-  }
-
-  .btn:hover,
-  .btn:active {
-    background-color: var(--off-black);
-    outline-color: var(--off-black);
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    margin-left: auto;
+    bottom: -50px;
   }
 
   .output {
-    padding-top: 64px; 
-    font-size: 60px;
-    font-weight: 800;
-    font-style: italic;
+    padding-top: 50px;
+    font-size: 112px;
   }
+}
 
-  .output p {
-    margin: 0;
-    letter-spacing: -0.04em;
-    line-height: 100%;
-    color: var(--off-black);
-  }
+.attribution {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  font-size: 11px;
+  text-align: center;
+  color: var(--smokey-grey);
+}
 
-  .output p .results {
-    color: var(--purple);
-  }
-
-  @media (min-width: 1024px) {
-    .page {
-      padding-top: 155px;
-    }
-
-    .calculator {
-      padding: 56px;
-      border-radius: 24px 24px 200px;
-    }
-
-    .fieldset {
-      margin-right: 0;
-      padding-bottom: 50px;
-      gap: 32px;
-    }
-
-    .fieldset label {
-      margin-bottom: 10px;
-    }
-
-    .fieldset .input {
-      width: 160px;
-      height: 68px;
-      padding: 24px;
-      font-size: 32px;
-    }
-    
-    .btn {
-      width: 100px;
-      height: 100px;
-      margin: 0;
-      margin-left: auto;
-      bottom: -50px;
-    }
-
-    .output {
-      padding-top: 50px;
-      font-size: 112px;
-    }
-  }
-
-  .attribution {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    font-size: 11px;
-    text-align: center;
-    color: var(--smokey-grey);
-  }
-
-  .attribution a {
-    color: var(--purple);
-  }
+.attribution a {
+  color: var(--purple);
+}

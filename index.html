@@ -10,49 +10,62 @@
 
   <title>Frontend Mentor | Age calculator app</title>
   <style>
+    .field-error-text {
+      color: red;
+      font-size: 11px;
+    }
+
+    .pixel {
+      position: fixed;
+      top: 0;
+      opacity: 0.5;
+      filter: invert(1);
+    }
 
   </style>
 </head>
 
 <body>
+  <!-- <img src="/design/desktop-error-empty.jpg" alt="" class="pixel"> -->
   <main class="page">
     <article class="calculator">
-      <fieldset class="fieldset">
+      <form class="fieldset">
         <h2 class="visually-hidden">Your date of birth</h2>
-        <div>
+        <div class="form-group">
           <label for="day">Day</label>
-          <input type="text" name="day" id="day" class="input" placeholder="DD">
+          <input type="number" name="day" id="day" class="input" placeholder="DD" min="1" max="31" required data-pristine-min-message="Must be a valid day" data-pristine-max-message="Must be a valid day" data-pristine-required-message="This field is required">
         </div>
-        <div>
+        <div class="form-group">
           <label for="month">Month</label>
-          <input type="text" name="month" id="month" class="input" placeholder="MM">
+          <input type="number" name="month" id="month" class="input" placeholder="MM" min="1" max="12" data-pristine-min-message="Must be a valid month" data-pristine-max-message="Must be a valid month" required data-pristine-required-message="This field is required">
         </div>
-        <div>
+        <div class="form-group">
           <label for="year">Year</label>
-          <input type="text" name="year" id="year" class="input" placeholder="YYYY">
+          <input type="number" name="year" id="year" class="input" placeholder="YYYY" min="1900" data-pristine-max-message="Must be in the past" required data-pristine-required-message="This field is required">
         </div>
 
-        <button type="button" class="btn"><span class="visually-hidden">submit</span></button>
-      </fieldset>
+        <button type="submit" class="btn"><span class="visually-hidden">submit</span></button>
+      </form>
       <section class="output">
         <h2 class="visually-hidden">Results</h2>
         <p>
           <span class="results year">--</span>&nbsp;years
         </p>
         <p>
-            <span class="results months">--</span>&nbsp;months
+            <span class="results month">--</span>&nbsp;months
         </p>
         <p>
-          <span class="results days">--</span>&nbsp;days
+          <span class="results day">--</span>&nbsp;days
         </p>
       </section>
     </article>
   </main>
-  <div class="attribution">
+  <footer class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
     Coded by <a href="#">Your Name Here</a>.
-  </div>
-  <script src="/js/calculator.js"></script>
+  </footer>
+  <script src="pristine/pristine.min.js"></script>
+  <script src="/js/calculator.js" defer></script>
 </body>
 
 </html>
