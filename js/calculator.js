@@ -83,17 +83,22 @@ yearInput.addEventListener('change', () => {
 
 // ====================================================== animation
 
-const animateValue = (field, max, time) => {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / time, 1);
-        field.textContent = `${Math.floor(progress * max)}`;
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
+const animateValue = (field, max) => {
+    return new Promise((resolve) => {
+        let dur = max * 50;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / dur, 1);
+            field.textContent = `${Math.floor(progress * max)}`;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                resolve();
+            }
+        };
+        window.requestAnimationFrame(step);
+    })
 }
 
 // ===================================================== form control
@@ -107,16 +112,14 @@ const onFormSubmit = () => {
     const month = diffDate.getMonth();
     const day = diffDate.getDate();
 
-    setTimeout(() => {animateValue(yearOutput, year, 2000);});
-    setTimeout(() => {animateValue(monthOutput, month, 500);}, 2000);
-    setTimeout(() => {animateValue(dayOutput, day, 2000);}, 2500);
-    
+    animateValue(yearOutput, year)
+    .then(() => {return animateValue(monthOutput, month)})
+    .then(() => {return animateValue(dayOutput, day)});
 }
 
 dateForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const valid = pristine.validate();
-    console.log(valid);
     if (valid) {
         onFormSubmit();
     }
