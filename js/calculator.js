@@ -18,9 +18,7 @@ const enoughDays = () => {
         enough = parseInt(dayInput.value) <= 29;
     } else if (short.includes(month)) {
         enough = parseInt(dayInput.value) <= 30;
-        console.log("enough", enough);
     }
-
     return enough;
 }
 
