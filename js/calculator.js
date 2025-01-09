@@ -83,19 +83,24 @@ yearInput.addEventListener('change', () => {
 
 const animateValue = (field, max) => {
     return new Promise((resolve) => {
-        let dur = max * 50;
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / dur, 1);
-            field.textContent = `${Math.floor(progress * max)}`;
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            } else {
-                resolve();
-            }
-        };
-        window.requestAnimationFrame(step);
+        if (max > 0) {
+            let dur = max * 50;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / dur, 1);
+                field.textContent = `${Math.floor(progress * max)}`;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    resolve();
+                }
+            };
+            window.requestAnimationFrame(step);
+        } else {
+            field.textContent = max;
+            resolve();
+        }
     })
 }
 
@@ -107,6 +112,10 @@ const onFormSubmit = () => {
     const diff = Date.parse(now) - Date.parse(birth);
     const diffDate = new Date(diff);
     const year = parseInt(diffDate.getFullYear()) - 1970;
+    console.log(diffDate);
+    console.log(year);
+    console.log(diffDate.getFullYear());
+    console.log(birth, 'now', now, 'diff', diff);
     const month = diffDate.getMonth();
     const day = diffDate.getDate();
 
